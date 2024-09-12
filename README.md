@@ -1,4 +1,6 @@
-# Car Object Detection Using YOLO
+<h3>GPU ACCELERATED YOLOv5-OpenVINO</h3>
+<p>Note: OpenVINO supports Intel GPUs that is its for use on devices that are equipped with Intel Computing units like Lenovo and others with intel iris(x) and others</p>
+# Car Object Detection Using YOLO and OpenVINO accelerated by GPUs (mainly for video inference)
 
 ## Step 1: Install the Required Libraries
 
@@ -10,11 +12,6 @@ source ./venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
-
-## Step 2: Run the Car Object Counting Using YOLO
-
-Make sure you run the backend server first to allow you to send data to the server from the detector in real-time. Here are the basic commands for running the inference:
-
 ### Note
 
 - Make sure you've downloaded the video we're using for testing from here: <https://youtu.be/MNn9qKG2UFI?si=Pt6RE8dt17OV67ne>
@@ -22,8 +19,21 @@ Make sure you run the backend server first to allow you to send data to the serv
 Use the commands below to run the
 
 ```bash
+Convert the yolov5s.pt to onnx and then convert the onnx model to OpenVINO IR format
+use the command to convert *.pt model to .onnx format
+python export.py --weights path/to/yolov5s.pt --data_type FP16/FP32/INT8 --include onnx
+
 # Quick run
-python main.py --source "path/to/video.mp4" --view-img
+Loading OpenVINO model on GPU device
+
+python inference-gpu.py --input_path "path/to/sample_video.mp4" --target_device "GPU" --media_type "video" --threshold 0.4(video inferencing on GPU)
+python inference-gpu.py --input_path "path/to/sample_image.jpg" --target_device "GPU" --media_type "image" --threshold 0.4(image inferencing on GPU)
+
+Loading OpenVINO model on CPU device
+python inference-gpu.py --input_path "path/to/sample_video.mp4" --target_device "CPU" --media_type "video" --threshold 0.4(video inferencing on CPU)
+python inference-gpu.py --input_path "C:\Users\Moses\Downloads\Video\sample_video.mp4" --target_device "GPU" --media_type "image" --threshold 0.4(image inferencing on CPU) 
+
+For Running with Native yolov5 use these commands below
 
 # If you want to save results
 python main.py --source "path/to/video.mp4" --save-img --view-img
