@@ -1,0 +1,12 @@
+venv
+__pycache__
+video2.mp4
+runs
+output
+yolov5s.bin
+yolov5s.onnx
+yolov5s.xml
+*.__pycache__
+*.pyx
+*.so
+
