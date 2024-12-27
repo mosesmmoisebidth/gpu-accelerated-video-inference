@@ -61,3 +61,5 @@ python main.py --source "path/to/video.mp4" --view-img
 - `--line-thickness`: Specifies the bounding box thickness
 - `--region-thickness`: Specifies the region boxes thickness
 - `--track-thickness`: Specifies the track line thickness
+
+<h4>Feel free to report any issue about this</h4>
